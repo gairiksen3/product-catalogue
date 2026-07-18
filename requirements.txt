@@ -1,0 +1,9 @@
+# Python dependencies for the PDF import pipeline
+# (scripts/import_products_from_pdf.py).
+#
+# Install into the project's virtual environment:
+#   python -m venv .venv
+#   .venv\Scripts\python.exe -m pip install -r requirements.txt
+
+pypdf>=6.0
+pillow>=11.0
