@@ -25,6 +25,10 @@ return new class extends Migration
             // SKU is unique per user, not globally — two users may each import
             // a product with the same SKU without colliding.
             $table->unique(['user_id', 'sku']);
+
+            // Indexes to speed up lookups/searches by name and SKU.
+            $table->index('name');
+            $table->index('sku');
         });
     }
 
