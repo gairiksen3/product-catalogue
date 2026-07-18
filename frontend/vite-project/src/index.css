@@ -290,11 +290,19 @@ select:focus {
   object-fit: cover;
 }
 .card-media-placeholder {
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
   height: 100%;
   color: var(--muted);
   font-size: 0.85rem;
+}
+.card-media-placeholder-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  opacity: 0.6;
 }
 .badge {
   position: absolute;

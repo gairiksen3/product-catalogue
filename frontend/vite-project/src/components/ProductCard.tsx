@@ -15,7 +15,23 @@ export default function ProductCard({ product }: { product: Product }) {
         {product.image_url ? (
           <img src={product.image_url} alt={product.name} loading="lazy" />
         ) : (
-          <div className="card-media-placeholder">No image</div>
+          <div className="card-media-placeholder">
+            <svg
+              className="card-media-placeholder-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+              <circle cx="8.5" cy="8.5" r="1.5" />
+              <path d="M21 15l-5-5L5 21" />
+            </svg>
+            <span>No image</span>
+          </div>
         )}
         <span className={`badge ${inStock ? 'badge-in' : 'badge-out'}`}>
           {product.stock_status}
