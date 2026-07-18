@@ -13,7 +13,7 @@ class CatalogFlowTest extends TestCase
 
     public function test_user_can_register_with_valid_credentials(): void
     {
-        $response = $this->postJson('/register', [
+        $response = $this->postJson('/api/register', [
             'name' => 'Jane Doe',
             'email' => 'jane@example.com',
             'password' => '12345678',
@@ -28,7 +28,10 @@ class CatalogFlowTest extends TestCase
 
     public function test_products_can_be_filtered_and_paginated(): void
     {
+        $user = User::factory()->create();
+
         Product::create([
+            'user_id' => $user->id,
             'name' => 'Tangy Salad',
             'sku' => 'SAL-1001',
             'category' => 'Salad',
@@ -39,6 +42,7 @@ class CatalogFlowTest extends TestCase
         ]);
 
         Product::create([
+            'user_id' => $user->id,
             'name' => 'Vegan Risotto',
             'sku' => 'VEG-2002',
             'category' => 'Appetizer',
@@ -48,10 +52,9 @@ class CatalogFlowTest extends TestCase
             'image_path' => 'products/demo.jpg',
         ]);
 
-        $user = User::factory()->create();
         $this->actingAs($user);
 
-        $response = $this->getJson('/products?search=sal&category=Salad&stock_status=In%20Stock&sort=price_desc&page=1');
+        $response = $this->getJson('/api/products?search=sal&category=Salad&stock_status=In%20Stock&sort=price_desc&page=1');
 
         $response->assertStatus(200)
             ->assertJsonPath('meta.per_page', 12)
